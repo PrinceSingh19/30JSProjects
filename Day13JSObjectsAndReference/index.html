@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>JS Reference VS Copy</title>
+	</head>
+	<body>
+		<script>
+			// start with strings, numbers and booleans
+			/* 	let name = "prince";
+			let name2 = name;
+			console.log(name, name2);
+			name = "singh";
+			console.log(name, name2); */
+			// Let's say we have an array
+			const players = ["Wes", "Sarah", "Ryan", "Poppy"];
+
+			// and we want to make a copy of it.
+			//const team = players;
+			//so instead of directly referencing we can use slice to copy the original array
+			// it will fix the referencing problem
+			// You might think we can just do something like this:
+			//console.log(team);
+			// however what happens when we update that array?
+			// now here is the problem!
+			// oh no - we have edited the original array too!
+
+			// Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+			// So, how do we fix this? We take a copy instead!
+			// one way
+			//const team = players.slice();
+
+			// or create a new array and concat the old one in
+			//const team = [].concat(players);
+
+			// or use the new ES6 Spread
+			const team = [...players];
+			team[3] = "Prince";
+			//console.log(team);
+			//console.log(players);
+			// now when we update it, the original one isn't changed
+
+			// The same thing goes for objects, let's say we have a person object
+
+			// with Objects
+			const person = {
+				name: "Wes Bos",
+				age: 80,
+			};
+
+			// and think we make a copy:
+			const captain = person;
+			//captain.age = 99;
+
+			// how do we take a copy instead?
+			const cap2 = Object.assign({}, person, { number: 99, age: 12 });
+			// Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+			//console.log(cap2);
+			//console.log(person);
+			// We will hopefully soon see the object ...spread
+			const cap3 = { ...person };
+			console.log(cap3);
+		</script>
+	</body>
+</html>
